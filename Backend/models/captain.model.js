@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const { estimatedDocumentCount } = require('./blackListToken.model')
-const bcryt = require('bcryt')
-const jwt = require('jwt')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken') //
+
 const captainSchema = new mongoose.Schema({
     fullname: {
         firstname: {
@@ -14,63 +14,74 @@ const captainSchema = new mongoose.Schema({
             minlength: [3, "Last name should be at least 3 characters long"]
         }
         ,
-        email: {
+       
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        minlength: [3, "Email should be at least 5 characters long"],
+    }
+    ,
+    password: {
+        type: String,
+        required: true,
+        select: false,
+        minlength: [6, "Password should be at least 6 characters long"]
+    },
+    socketId: {
+        type: String,
+    }
+    ,
+    status: {
+        type: String,
+        enum: ["active", "inactive"],
+        default: "inactive",
+    },
+    vehicle: {
+        color: {
             type: String,
             required: true,
-            unique: true,
-            minlength: [3, "Email should be at least 5 characters long"],
-        }
-        ,
-        password: {
+            minlength: [3, "Color should be at least 3 characters long"]
+        },
+        plate: {
             type: String,
             required: true,
-            select: false,
-            minlength: [6, "Password should be at least 6 characters long"]
+            minlength: [6, "Plate number should be at least 6 characters long"]
         },
-        socketId: {
+        capacity: {
+            type: Number,
+            required: true,
+            min: [1, "Capacity should be at least 1 passenger"]
+        },
+        vehicleType: {
             type: String,
+            required: true,
+            enum: ["car", "auto", "motorcycle"],
         }
-        ,
-        status: {
-            type: String,
-            enum: ["active", "inactive"],
-            default: "inactive",
-        }, 
-        vehicle: {
-            color: {
-                type: String,
-                required: true,
-                minlength: [3, "Color should be at least 3 characters long"]
-            },
-            plate: {
-                type: String,
-                required: true,
-                minlength: [6, "Plate number should be at least 6 characters long"]
-            },
-            capacity : {
-                type: Number,
-                required: true,
-                min: [1, "Capacity should be at least 1 passenger"]
-            },
-            vehicleType : {
-                type: String,
-                required: true,
-                enum: ["car", "auto", "motorcycle"],
-            } 
+    },
+    location: {
+        lat: {
+            type: Number
         },
-        location : {
-           lat : {
-            type : Number
-           },
-           lng : {
-            type : Number
-           }
+        lng: {
+            type: Number
         }
     }
 })
 
 
-captionSchema.methods.genrateAuthToken = function (){
-
+captainSchema.methods.genrateAuthToken = function () {
+    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' })
+    return token;
+}
+captainSchema.methods.comparePassword = async function (password) {
+    return await bcrypt.compare(password, this.password)
+}
+captainSchema.statics.hashPassword = async function (password) {
+    return await bcrypt.hash(password, 10)
 }
 
+const captainModel = mongoose.model('captain', captainSchema)
+
+module.exports = captainModel;
