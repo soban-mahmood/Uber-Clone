@@ -138,3 +138,87 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
   - Clears auth cookie
   - Blacklists the token
 - **401 Unauthorized**: Invalid or missing token
+
+### 5. Create Captain Account
+**Endpoint:** `/captains/register`
+**Method:** POST
+
+#### Request Body:
+```json
+{
+    "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "password": "password123",
+    "vehicle": {
+        "color": "Black",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+    }
+}
+```
+
+#### Validation Rules:
+- `email`: Must be a valid email format
+- `fullname.firstname`: Minimum 3 characters
+- `password`: Minimum 6 characters
+- `vehicle.color`: Minimum 3 characters
+- `vehicle.plate`: Minimum 3 characters
+- `vehicle.capacity`: Must be at least 1
+- `vehicle.vehicleType`: Must be one of: "car", "motorcycle", "auto"
+
+#### Responses:
+- **201 Created**: Captain successfully registered
+  ```json
+  {
+      "captain": {
+          "fullname": {
+              "firstname": "John",
+              "lastname": "Doe"
+          },
+          "email": "john.doe@example.com",
+          "vehicle": {
+              "color": "Black",
+              "plate": "ABC123",
+              "capacity": 4,
+              "vehicleType": "car"
+          },
+          "status": "inactive",
+          "_id": "generated_id"
+      },
+      "token": "JWT_TOKEN"
+  }
+  ```
+- **400 Bad Request**: 
+  - When validation fails:
+    ```json
+    {
+        "errors": [
+            {
+                "msg": "Invalid Email",
+                "param": "email",
+                "location": "body"
+            }
+        ]
+    }
+    ```
+  - When captain already exists:
+    ```json
+    {
+        "message": "captain already exists"
+    }
+    ```
+
+#### Notes:
+- Password is automatically hashed before storage
+- JWT token is generated and returned upon successful registration
+- Initial captain status is set to "inactive"
+- Response includes both captain object and authentication token
+
+
+
+
+
