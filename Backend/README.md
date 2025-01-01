@@ -218,6 +218,154 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - Initial captain status is set to "inactive"
 - Response includes both captain object and authentication token
 
+## Captain Endpoints
+
+### 1. Register Captain
+**Endpoint:** `/captains/register`
+**Method:** POST
+
+#### Request Body:
+```json
+{
+    "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "email": "john@example.com",
+    "password": "password123",
+    "vehicle": {
+        "color": "Black",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+    }
+}
+```
+
+#### Success Response (201 Created):
+```json
+{
+    "captain": {
+        "_id": "60c72b2f9b1e8b001c8e4d5a",
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "email": "john@example.com",
+        "vehicle": {
+            "color": "Black",
+            "plate": "ABC123",
+            "capacity": 4,
+            "vehicleType": "car"
+        },
+        "status": "inactive"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+### 2. Login Captain
+**Endpoint:** `/captains/login`
+**Method:** POST
+
+#### Request Body:
+```json
+{
+    "email": "john@example.com",
+    "password": "password123"
+}
+```
+
+#### Success Response (200 OK):
+```json
+{
+    "captain": {
+        "_id": "60c72b2f9b1e8b001c8e4d5a",
+        "fullname": {
+            "firstname": "John",
+            "lastname": "Doe"
+        },
+        "email": "john@example.com",
+        "vehicle": {
+            "color": "Black",
+            "plate": "ABC123",
+            "capacity": 4,
+            "vehicleType": "car"
+        },
+        "status": "inactive"
+    },
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### Error Response (401 Unauthorized):
+```json
+{
+    "message": "Invalid email or password"
+}
+```
+
+### 3. Get Captain Profile
+**Endpoint:** `/captains/profile`
+**Method:** GET
+**Authentication:** Required (Bearer Token)
+
+#### Headers:
+```json
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### Success Response (200 OK):
+```json
+{
+    "_id": "60c72b2f9b1e8b001c8e4d5a",
+    "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+    },
+    "email": "john@example.com",
+    "vehicle": {
+        "color": "Black",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+    },
+    "status": "inactive",
+    "location": {
+        "lat": null,
+        "lng": null
+    }
+}
+```
+
+### 4. Logout Captain
+**Endpoint:** `/captains/logout`
+**Method:** GET
+**Authentication:** Required (Bearer Token)
+
+#### Headers:
+```json
+{
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### Success Response (200 OK):
+```json
+{
+    "message": "Logout successfully"
+}
+```
+
+#### Notes:
+- All authenticated endpoints require a valid JWT token in the Authorization header
+- Token is automatically blacklisted on logout
+- Login endpoint sets an HTTP-only cookie with the token
+- Password is never returned in any response
+- All error responses include appropriate HTTP status codes and error messages
+
 
 
 
