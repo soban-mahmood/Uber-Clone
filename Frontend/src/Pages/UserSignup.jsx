@@ -15,14 +15,14 @@ const UserSignup = () => {
             name="firstname"
             required
             autoComplete="off"
-            className="w-full mb-7 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-[#201c1c33]"
+            className="w-full mb-5 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-[#201c1c33]"
           />  <input
           type="text"
           placeholder="Last name"
           name="lastname"
           required
           autoComplete="off"
-          className="w-full mb-7 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-[#201c1c33]"
+          className="w-full mb-5 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-[#201c1c33]"
         />
           </div>
           <h3 className="text-lg font-medium mb-4">What's your's email?</h3>
