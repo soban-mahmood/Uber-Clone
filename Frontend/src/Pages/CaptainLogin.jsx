@@ -20,7 +20,7 @@ const CaptainLogin = () => {
   return (
     <div className="p-7 flex justify-between flex-col h-screen">
       <div>
-        <img src={logo} alt="Uber" className="w-16 mb-5 " />
+        <img src={logo} alt="Uber" className="w-20 mb-2 " />
         <form action="" onSubmit={submitHandel}>
           <h3 className="text-base font-medium mb-4">What's your's email?</h3>
           <input
