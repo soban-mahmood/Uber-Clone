@@ -20,9 +20,9 @@ const UserLogin = () => {
   return (
     <div className="p-7 flex justify-between flex-col h-screen">
       <div>
-        <img src={logo} alt="Uber" className="w-16 mb-8 " />
+        <img src={logo} alt="Uber" className="w-16 mb-5 " />
         <form action="" onSubmit={submitHandel}>
-          <h3 className="text-lg font-medium mb-4">What's your's email?</h3>
+          <h3 className="text-base font-medium mb-4">What's your's email?</h3>
           <input
             type="text"
             placeholder="email@example.com"
@@ -31,9 +31,9 @@ const UserLogin = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
             autoComplete="off"
-            className="w-full mb-7 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-[#201c1c33]"
+            className="w-full mb-5 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-sm"
           />
-          <h3 className="text-lg font-medium mb-4">Enter Password</h3>
+          <h3 className="text-base font-medium mb-4">Enter Password</h3>
           <input
             type="password"
             name="password"
@@ -41,7 +41,7 @@ const UserLogin = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3  mb-7 bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-base"
+            className="w-full p-3  mb-5 bg-[#eeeeee] border-gray-300 rounded-lg text-xl placeholder:text-sm"
           />
           <button className=" w-full bg-black text-white py-3 rounded-lg mt-3 flex justify-center items-center">
             Login
@@ -49,7 +49,7 @@ const UserLogin = () => {
           <p className=" text-center mt-4">
           Join a fleet?
             <Link to="/signup" className=" text-blue-600">
-     Register as a User
+          Create an account
             </Link>
           </p>
         </form>
