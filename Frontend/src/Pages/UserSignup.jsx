@@ -1,24 +1,35 @@
 import React, { useState } from "react";
 import logo from "../assets/Uber_logo_2018.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 const UserSignup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [userData, setUserData] = useState({});
+  // const [userData, setUserData] = useState({});
 
-  const submitHandler = (e) => {
+  const navigate = useNavigate();
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    setUserData({
+    const newUser = {
       fullName: {
         firstName: firstName,
         lastName: lastName,
       },
       email: email,
       password: password,
-    });
-    console.log(userData);
+    };
+
+    const user = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/user/register`,
+      newUser
+    );
+    if (response.status == 201) {
+      
+    }
+
     setEmail("");
     setPassword("");
     setFirstName("");
@@ -80,7 +91,7 @@ const UserSignup = () => {
             className="w-full p-3  mb-5 bg-[#eeeeee] border-gray-300 rounded-lg text-lg placeholder:text-sm"
           />
           <button className=" w-full bg-black text-white py-3 rounded-lg mt-3 flex justify-center items-center">
-            Login
+            Create account
           </button>
           <p className=" text-center mt-4">
             Already have an account?
