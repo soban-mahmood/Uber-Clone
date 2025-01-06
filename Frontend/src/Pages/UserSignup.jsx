@@ -1,117 +1,125 @@
-import React, { useState } from "react";
-import logo from "../assets/Uber_logo_2018.png";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-const UserSignup = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  // const [userData, setUserData] = useState({});
+import React, { useState, useContext } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { UserDataContext } from '../context/UserContext'
 
-  const navigate = useNavigate();
+
+
+const UserSignup = () => {
+  const [ email, setEmail ] = useState('')
+  const [ password, setPassword ] = useState('')
+  const [ firstName, setFirstName ] = useState('')
+  const [ lastName, setLastName ] = useState('')
+  const [ userData, setUserData ] = useState({})
+
+  const navigate = useNavigate()
+
+
+
+  const { user, setUser } = useContext(UserDataContext)
+
+
+
 
   const submitHandler = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const newUser = {
-      fullName: {
-        firstName: firstName,
-        lastName: lastName,
+      fullname: {
+        firstname: firstName,
+        lastname: lastName
       },
       email: email,
-      password: password,
-    };
+      password: password
+    }
+    
+    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
 
-    const user = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/user/register`,
-      newUser
-    );
-    if (response.status == 201) {
-      
+    if (response.status === 201) {
+      const data = response.data
+      setUser(data.user)
+      // localStorage.setItem('token', data.token)
+      navigate('/home')
     }
 
-    setEmail("");
-    setPassword("");
-    setFirstName("");
-    setLastName("");
-  };
+    console.log(user)
+    setEmail('')
+    setFirstName('')
+    setLastName('')
+    setPassword('')
 
+  }
   return (
-    <div className="p-7 flex justify-between flex-col h-screen">
-      <div>
-        <img src={logo} alt="Uber" className="w-20 mb-5  " />
-        <form action="" onSubmit={submitHandler}>
-          <h3 className="text-lg font-medium mb-4">What's your's Name</h3>
-          <div className="flex gap-4">
-            <input
-              type="text"
-              placeholder="First name"
-              name="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-              autoComplete="off"
-              className="w-full mb-5 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-lg placeholder:text-sm"
-            />{" "}
-            <input
-              type="text"
-              placeholder="Last name"
-              name="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-              autoComplete="off"
-              className="w-full mb-5 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-lg placeholder:text-sm"
-            />
-          </div>
-          <h3 className="text-base font-medium mb-2">What's your's email?</h3>
-          <input
-            type="text"
-            placeholder="email@example.com"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            autoComplete="off"
-            className="w-full mb-5 p-2  bg-[#eeeeee] border-gray-300 rounded-lg text-lg placeholder:text-sm"
-          />
-          <h3
-            className="text-base font-medium mb-2
-          "
-          >
-            Enter Password
-          </h3>
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3  mb-5 bg-[#eeeeee] border-gray-300 rounded-lg text-lg placeholder:text-sm"
-          />
-          <button className=" w-full bg-black text-white py-3 rounded-lg mt-3 flex justify-center items-center">
-            Create account
-          </button>
-          <p className=" text-center mt-4">
-            Already have an account?
-            <Link to="/login" className=" text-blue-600">
-              Login here
-            </Link>
-          </p>
-        </form>
-      </div>
-      <div className="text-center">
+    <div>
+      <div className='p-7 h-screen flex flex-col justify-between'>
         <div>
-          <p className="text-[10px] leading-tight">
-            This site is protected by reCAPTCHA and the{" "}
-            <span className="underline">Google Privacy Policy</span> and{" "}
-            <span className="underline">Terms of Service apply</span>.
-          </p>
+          <img className='w-16 mb-10' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYQy-OIkA6In0fTvVwZADPmFFibjmszu2A0g&s" alt="" />
+
+          <form onSubmit={(e) => {
+            submitHandler(e)
+          }}>
+
+            <h3 className='text-lg w-1/2  font-medium mb-2'>What's your name</h3>
+            <div className='flex gap-4 mb-7'>
+              <input
+                required
+                className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border  text-lg placeholder:text-base'
+                type="text"
+                placeholder='First name'
+                value={firstName}
+                onChange={(e) => {
+                  setFirstName(e.target.value)
+                }}
+              />
+              <input
+                required
+                className='bg-[#eeeeee] w-1/2  rounded-lg px-4 py-2 border  text-lg placeholder:text-base'
+                type="text"
+                placeholder='Last name'
+                value={lastName}
+                onChange={(e) => {
+                  setLastName(e.target.value)
+                }}
+              />
+            </div>
+
+            <h3 className='text-lg font-medium mb-2'>What's your email</h3>
+            <input
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value)
+              }}
+              className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+              type="email"
+              placeholder='email@example.com'
+            />
+
+            <h3 className='text-lg font-medium mb-2'>Enter Password</h3>
+
+            <input
+              className='bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base'
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value)
+              }}
+              required type="password"
+              placeholder='password'
+            />
+
+            <button
+              className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
+            >Create account</button>
+
+          </form>
+          <p className='text-center'>Already have a account? <Link to='/login' className='text-blue-600'>Login here</Link></p>
+        </div>
+        <div>
+          <p className='text-[10px] leading-tight'>This site is protected by reCAPTCHA and the <span className='underline'>Google Privacy
+            Policy</span> and <span className='underline'>Terms of Service apply</span>.</p>
         </div>
       </div>
-    </div>
-  );
-};
+    </div >
+  )
+}
 
-export default UserSignup;
+export default UserSignup
