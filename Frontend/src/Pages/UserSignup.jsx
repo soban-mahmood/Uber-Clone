@@ -12,39 +12,26 @@ const UserSignup = () => {
 
   const navigate = useNavigate();
 
-  const { user, setUser } = useContext(UserDataContext);
+  const { user, setUser } = React.useContext(UserDataContext);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      const newUser = {
-        fullname: {
-          firstname: firstName,
-          lastname: lastName,
-        },
-        email: email,
-        password: password,
-      };
-  
-      console.log('Request URL:', `${import.meta.env.VITE_BASE_URL}/users/register`);
-      console.log('Request Data:', newUser);
-
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/register`,
-        newUser
-      );
-      // Remove console.log(response.json()) as response is already a JSON object
-      
-      if (response.status === 201) {
-        const data = response.data;
-        setUser(data.user);
-        localStorage.setItem("token", data.token);
-        navigate("/home");
-      }
-    } catch (error) {
-      // Add error handling
-      console.error("Signup error:", error.response?.data || error.message);
-      // You might want to show this error to the user through some UI feedback
+    const newUser = {
+      fullname: {
+        firstname: firstName,
+        lastname: lastName,
+      },
+      email: email,
+      password: password,
+    };
+    const response = await axios.post(
+      `${import.meta.env.VITE_BASE_URL}/users/register`,
+      newUser
+    );
+    if (response.status === 201) {
+      const data = response.data;
+      setUser(data.user);
+      navigate("/home");
     }
   };
   return (
@@ -57,11 +44,7 @@ const UserSignup = () => {
             alt=""
           />
 
-          <form
-            onSubmit={(e) => {
-              submitHandler(e);
-            }}
-          >
+          <form onSubmit={submitHandler} method="post">
             <h3 className="text-lg w-1/2  font-medium mb-2">
               What's your name
             </h3>

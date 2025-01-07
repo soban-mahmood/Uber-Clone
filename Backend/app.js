@@ -18,6 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+app.get('/users/register', (req, res) => {
+  console.log(req.body); // Log incoming request body
+  res.send("submit");
+  // Validation and response handling
+});
 
 app.use('/users', userRoutes);
 app.use('/captains', captainRoutes);
