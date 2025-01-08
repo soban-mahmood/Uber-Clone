@@ -12,7 +12,8 @@ const UserSignup = () => {
 
   const navigate = useNavigate();
 
-  const { user, setUser } = React.useContext(UserDataContext);
+  const { user, setUser } =useContext(UserDataContext);
+
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -31,7 +32,7 @@ const UserSignup = () => {
     if (response.status === 201) {
       const data = response.data;
       setUser(data.user);
-      navigate("/home");
+  navigate('/home')
     }
   };
   return (
