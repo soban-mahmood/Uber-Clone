@@ -52,7 +52,7 @@ const UserSignup = () => {
             <div className="flex gap-4 mb-7">
               <input
                 required
-                className="bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border  text-lg placeholder:text-base"
+                className="bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border  text-lg placeholder:text-base placeholder:text-center"
                 type="text"
                 placeholder="First name"
                 value={firstName}
@@ -62,7 +62,7 @@ const UserSignup = () => {
               />
               <input
                 required
-                className="bg-[#eeeeee] w-1/2  rounded-lg px-4 py-2 border  text-lg placeholder:text-base"
+                className="bg-[#eeeeee] w-1/2  rounded-lg px-4 py-2 border  text-lg placeholder:text-base placeholder:text-center"
                 type="text"
                 placeholder="Last name"
                 value={lastName}
@@ -79,7 +79,7 @@ const UserSignup = () => {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-              className="bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base"
+              className="bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base placeholder:text-center"
               type="email"
               placeholder="email@example.com"
             />
@@ -87,7 +87,7 @@ const UserSignup = () => {
             <h3 className="text-lg font-medium mb-2">Enter Password</h3>
 
             <input
-              className="bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base"
+              className="bg-[#eeeeee] mb-7 rounded-lg px-4 py-2 border w-full text-lg placeholder:text-base placeholder:text-center"
               value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -97,7 +97,7 @@ const UserSignup = () => {
               placeholder="password"
             />
 
-            <button className="bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base">
+            <button className="bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base placeholder:text-center">
               Create account
             </button>
           </form>
