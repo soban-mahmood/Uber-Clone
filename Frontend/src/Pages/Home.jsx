@@ -9,13 +9,13 @@ const Home = () => {
     <img src="https://www.uberpeople.net/attachments/369988/" className= "h-full w-full object-cover" alt="MAP" />
    </div>
    <div className='bg-white absolute top-0 p-5'>
-    <h4 className='text-xl font-semibold'>Find a trip</h4>
-    <form>
-      <input type="text" placeholder="Enter pickup location" className="border p-2 rounded-md" />
-      <input type="text" placeholder="Enter drop-off location" className="border p-2 rounded-md mt-2" />
+    <h4 className='text-xl font-semibold mb-4'>Find a trip</h4>
+    <form className="">
+      <input type="text" placeholder="Add pick-up location" className="border p-2 w-full rounded-md  bg-[#EEEEEE] font-semibold" />
+      <input type="text" placeholder="Enter your destination  " className="border p-2 w-full rounded-md mt-2 bg-[#EEEEEE] font-semibold" />
       <button className="bg-blue-500 text-white p-2 rounded-md">Search</button>
     </form>
-   </div>
+   </div> bg-[#EEEEEE] font-semibold
     </div>
   )
 }
