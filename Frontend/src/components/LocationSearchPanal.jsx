@@ -1,19 +1,26 @@
-import React from 'react'
+import React from "react";
 
-const LocationSearchPanal = () => {
+const LocationSearchPanal = ({uberVechiles,setUberVechiles}) => {
+  const location = [
+    "24B , Near Kapoors Cafe ,Soban Coding School",
+    "22D , Near Kapoors Cafe ,Soban Coding School",
+    "25F , Near Kapoors Cafe ,Soban Coding School",
+    "90B , Near Kapoors Cafe ,Soban Coding School",
+  ];
   return (
-    <div div className='flex flex-col gap-8'>
-    <div>
-    <div className="flex items-center gap-4">
-      <h2 className='bg-[#eeeeee] rounded-3xl h-10 flex items-center justify-center w-10 font-semibold'><i class="ri-map-pin-fill"></i></h2>
-      <h4>24B , Near Kapoors Cafe Soban Coding School</h4>
-     </div>
-    <hr />
+    <div div className="">
+      {location.map((loc) => {
+        return (
+          <div className="flex items-center my-2 gap-2  active:border-black border-2 p-4 rounded-lg ">
+            <h2 className="bg-[#eeeeee] rounded-3xl h-12 flex items-center justify-center w-14 font-semibold">
+              <i className="text-xl ri-map-pin-fill"></i>
+            </h2>
+            <h4 className="font-semibold">{loc}</h4>
+          </div>
+        );
+      })}
     </div>
-   
-    </div>
-     
-  )
-}
+  );
+};
 
-export default LocationSearchPanal
+export default LocationSearchPanal;

@@ -1,22 +1,26 @@
 import React, { useRef, useState } from "react";
 import logo from "../assets/Uber_logo_2018.png";
+
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 import LocationSearchPanal from "../components/LocationSearchPanal";
+import UberVechiles from "../components/UberVechiles";
+
 const Home = () => {
   const [pickUp, setPickUp] = useState("");
   const [dropOff, setDropOff] = useState("");
   const [panalOpen, setPanalOpen] = useState(false);
   const panalRef = useRef(null);
   const panalCloseRef = useRef(null);
+  const [uberVechiles, setUberVechiles] = useState(false);
 
   useGSAP(() => {
     if (panalOpen) {
       gsap.to(panalRef.current, {
         hidden: false,
         height: "70%",
-        padding:24
+        padding: 24,
       });
       gsap.to(panalCloseRef.current, {
         opacity: "1",
@@ -38,7 +42,7 @@ const Home = () => {
     setDropOff(dropOff);
   };
   return (
-    <div className="h-screen">
+    <div className="h-screen relative">
       <img src={logo} className="w-20 absolute left-5 top-5" alt="" />
       <div className="h-screen w-screen">
         <img
@@ -84,9 +88,10 @@ const Home = () => {
           </form>
         </div>
         <div className=" bg-white h-0 " ref={panalRef}>
-          <LocationSearchPanal />
+          <LocationSearchPanal uberVechiles={uberVechiles} setUberVechiles={setUberVechiles}/>
         </div>
       </div>
+       <UberVechiles/>
     </div>
   );
 };
