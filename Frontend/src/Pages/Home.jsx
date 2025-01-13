@@ -12,8 +12,9 @@ const Home = () => {
   const [dropOff, setDropOff] = useState("");
   const [panalOpen, setPanalOpen] = useState(false);
   const panalRef = useRef(null);
+  const vechileRef = useRef(null);
   const panalCloseRef = useRef(null);
-  const [uberVechiles, setUberVechiles] = useState(false);
+  const [uberVechilesOpen, setUberVechilesOpen] = useState(false);
 
   useGSAP(() => {
     if (panalOpen) {
@@ -27,7 +28,6 @@ const Home = () => {
       });
     } else {
       gsap.to(panalRef.current, {
-        hidden: true,
         height: "0%",
       });
       gsap.to(panalCloseRef.current, {
@@ -36,13 +36,24 @@ const Home = () => {
     }
   }, [panalOpen]);
 
+  useGSAP(() => {
+    if (uberVechilesOpen) {
+      gsap.to(vechileRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(vechileRef.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [uberVechilesOpen]);
   const submitHandler = (e) => {
     e.preventDefault();
     setPickUp(pickUp);
     setDropOff(dropOff);
   };
   return (
-    <div className="h-screen relative">
+    <div className="h-screen relative overflow-hidden">
       <img src={logo} className="w-20 absolute left-5 top-5" alt="" />
       <div className="h-screen w-screen">
         <img
@@ -88,10 +99,16 @@ const Home = () => {
           </form>
         </div>
         <div className=" bg-white h-0 " ref={panalRef}>
-          <LocationSearchPanal uberVechiles={uberVechiles} setUberVechiles={setUberVechiles}/>
+          <LocationSearchPanal
+            setPanalOpen={setPanalOpen}
+            setUberVechilesOpen={setUberVechilesOpen}
+          />
         </div>
       </div>
-       <UberVechiles/>
+      <UberVechiles
+        vechileRef={vechileRef}
+        setUberVechilesOpen={setUberVechilesOpen}
+      />
     </div>
   );
 };

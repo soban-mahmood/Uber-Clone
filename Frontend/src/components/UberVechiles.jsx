@@ -1,12 +1,23 @@
-import React from 'react'
+import React from "react";
 import carPng from "../assets/carpng.webp";
 import motoPng from "../assets/moto.webp";
 import autoPng from "../assets/uberAuto.webp";
-const UberVechiles = () => {
+const UberVechiles = ({ vechileRef, setUberVechilesOpen }) => {
   return (
     <>
-       <div className="fixed w-full z-100 bottom-0 p-2 translate-y-full bg-white">
-        <h2 className="text-2xl font-bold mb-5 gap-">Choose a Vehicle</h2>
+      <div
+        ref={vechileRef}
+        className="fixed w-full z-100 bottom-0 p-2 translate-y-full bg-white"
+      >
+        <div className="flex items-center justify-between px-4">
+          <h2 className="text-2xl font-bold mb-5 ">Choose a Vehicle</h2>
+          <i
+            class="ri-skip-down-fill mb-4 text-[30px]"
+            onClick={() => {
+              setUberVechilesOpen(false);
+            }}
+          ></i>
+        </div>
         <div className="flex justify-between p-2 mb-2   gap-6 items-center w-full border-[2px] active:border-black rounded-xl">
           <img src={carPng} alt="Car" className="h-16 " />
           <div>
@@ -49,15 +60,13 @@ const UberVechiles = () => {
               </span>
             </h4>
             <h5>2 mins away </h5>
-            <p className="text-[#eeeee] text-[11px]">
-              Affordable, ride
-            </p>
+            <p className="text-[#eeeee] text-[11px]">Affordable, ride</p>
           </div>
           <h2 className="font-bold">RS,119.3</h2>
         </div>
-      </div> 
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default UberVechiles
+export default UberVechiles;
