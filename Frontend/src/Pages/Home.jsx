@@ -18,7 +18,7 @@ const Home = () => {
   const confrimRide = useRef(null);
   const [uberVechilesOpen, setUberVechilesOpen] = useState(false);
   const [confrimVechilesOpen, setconfrimVechilesOpen] = useState(false);
-console.log(confrimVechilesOpen)
+
   useGSAP(() => {
     if (panalOpen) {
       gsap.to(panalRef.current, {
@@ -55,7 +55,6 @@ console.log(confrimVechilesOpen)
     if (confrimVechilesOpen) {
       gsap.to(confrimRide.current, {
         transform: "translateY(0)",
-
       });
     } else {
       gsap.to(confrimRide.current, {
@@ -127,7 +126,10 @@ console.log(confrimVechilesOpen)
         setUberVechilesOpen={setUberVechilesOpen}
         setconfrimVechilesOpen={setconfrimVechilesOpen}
       />
-      <ConfimRide confrimRide={confrimRide} />
+      <ConfimRide
+        confrimRide={confrimRide}
+        setconfrimVechilesOpen={setconfrimVechilesOpen}
+      />
     </div>
   );
 };
