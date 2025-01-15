@@ -2,7 +2,12 @@ import React from "react";
 import carPng from "../assets/carpng.webp";
 import motoPng from "../assets/moto.webp";
 import autoPng from "../assets/uberAuto.webp";
-const UberVechiles = ({ vechileRef, setUberVechilesOpen }) => {
+
+const UberVechiles = ({
+  vechileRef,
+  setUberVechilesOpen,
+  setconfrimVechilesOpen,
+}) => {
   return (
     <>
       <div
@@ -12,13 +17,18 @@ const UberVechiles = ({ vechileRef, setUberVechilesOpen }) => {
         <div className="flex items-center justify-between px-4">
           <h2 className="text-2xl font-bold mb-5 ">Choose a Vehicle</h2>
           <i
-            class="ri-skip-down-fill mb-4 text-[30px]"
+            className="ri-skip-down-fill mb-4 text-[30px]"
             onClick={() => {
               setUberVechilesOpen(false);
             }}
           ></i>
         </div>
-        <div className="flex justify-between p-2 mb-2   gap-6 items-center w-full border-[2px] active:border-black rounded-xl">
+        <div
+          className="flex justify-between p-2 mb-2   gap-6 items-center w-full border-[2px] active:border-black rounded-xl"
+          onClick={() => {
+            setconfrimVechilesOpen(true);
+          }}
+        >
           <img src={carPng} alt="Car" className="h-16 " />
           <div>
             <h4 className="font-semibold">
@@ -34,7 +44,12 @@ const UberVechiles = ({ vechileRef, setUberVechilesOpen }) => {
           </div>
           <h2 className="font-bold">RS,93.3</h2>
         </div>
-        <div className="flex justify-between p-2 mb-2 gap-6 items-center w-full border-[2px] active:border-black rounded-xl">
+        <div
+          className="flex justify-between p-2 mb-2 gap-6 items-center w-full border-[2px] active:border-black rounded-xl"
+          onClick={() => {
+            setconfrimVechilesOpen(true);
+          }}
+        >
           <img src={motoPng} alt="Car" className="h-16 " />
           <div>
             <h4 className="font-semibold">
@@ -50,7 +65,12 @@ const UberVechiles = ({ vechileRef, setUberVechilesOpen }) => {
           </div>
           <h2 className="font-bold">RS,67.3</h2>
         </div>
-        <div className="flex justify-between p-2 mb-2 gap-6 items-center w-full border-[2px] active:border-black rounded-xl">
+        <div
+          className="flex justify-between p-2 mb-2 gap-6 items-center w-full border-[2px] active:border-black rounded-xl"
+          onClick={() => {
+            setconfrimVechilesOpen(true);
+          }}
+        >
           <img src={autoPng} alt="Car" className="h-16 " />
           <div>
             <h4 className="font-semibold">

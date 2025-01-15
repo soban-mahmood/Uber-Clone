@@ -6,6 +6,7 @@ import gsap from "gsap";
 import "remixicon/fonts/remixicon.css";
 import LocationSearchPanal from "../components/LocationSearchPanal";
 import UberVechiles from "../components/UberVechiles";
+import ConfimRide from "../components/ConfimRide";
 
 const Home = () => {
   const [pickUp, setPickUp] = useState("");
@@ -14,8 +15,10 @@ const Home = () => {
   const panalRef = useRef(null);
   const vechileRef = useRef(null);
   const panalCloseRef = useRef(null);
+  const confrimRide = useRef(null);
   const [uberVechilesOpen, setUberVechilesOpen] = useState(false);
-
+  const [confrimVechilesOpen, setconfrimVechilesOpen] = useState(false);
+console.log(confrimVechilesOpen)
   useGSAP(() => {
     if (panalOpen) {
       gsap.to(panalRef.current, {
@@ -47,6 +50,20 @@ const Home = () => {
       });
     }
   }, [uberVechilesOpen]);
+
+  useGSAP(() => {
+    if (confrimVechilesOpen) {
+      gsap.to(confrimRide.current, {
+        transform: "translateY(0)",
+
+      });
+    } else {
+      gsap.to(confrimRide.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [confrimVechilesOpen]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     setPickUp(pickUp);
@@ -108,7 +125,9 @@ const Home = () => {
       <UberVechiles
         vechileRef={vechileRef}
         setUberVechilesOpen={setUberVechilesOpen}
+        setconfrimVechilesOpen={setconfrimVechilesOpen}
       />
+      <ConfimRide confrimRide={confrimRide} />
     </div>
   );
 };
